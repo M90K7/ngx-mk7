@@ -1,0 +1,22 @@
+<div class="wrapper">
+	<section>
+		<h2>fill horizontal</h2>
+		<button class="progress-button" data-style="fill" data-horizontal
+                (click)="onClick()"
+		        mk7ProgressButton="fill" [showProcess]="showProcess" [value]="value">Submit</button>
+	</section>
+	<section>
+		<h2>fill vertical</h2>
+		<button class="progress-button" data-style="fill" data-vertical>Submit</button>
+	</section>
+	<section>
+		<h2>shrink horizontal</h2>
+		<button class="progress-button" data-style="shrink" data-horizontal>Submit</button>
+	</section>
+	<section>
+		<h2>shrink vertical</h2>
+		<button class="progress-button" data-style="shrink" data-vertical>Submit</button>
+	</section>
+</div>
+
+<router-outlet></router-outlet>
