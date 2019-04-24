@@ -169,7 +169,7 @@ export class ProgressButtonDirective implements OnChanges, AfterViewInit {
                 return;
               }
               this.button.removeEventListener(this.transEndEventName, onEndTransFn);
-              this._stop();
+              this._stop(this.value);
             };
 
             if (/*support.transitions*/ true) {
