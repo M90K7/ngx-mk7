@@ -59,18 +59,10 @@ export class ProgressButtonDirective implements OnChanges, AfterViewInit {
   //}
 
   ngOnChanges(changes: SimpleChanges): void {
-    const _showProcess = changes["showProcess"];
+    //const _showProcess = changes["showProcess"];
     const _value = changes["value"];
-    if (this.progress && _showProcess) {
-      if (_showProcess.currentValue) {
-        this.startProcess();
-      } else {
-        this.stopProcess();
-      }
 
-    }
-
-    if (this.progress && this.showProcess && _value) {
+    if (this.progress && _value != null) {
       if (_value.currentValue >= 0 && _value.currentValue <= 100) {
         this._setProgress(_value.currentValue);
         if (_value.currentValue >= 100) {
@@ -243,9 +235,11 @@ export class ProgressButtonDirective implements OnChanges, AfterViewInit {
   }
 
   stopProcess() {
-    this.button.removeAttribute("disabled");
-    this.classIE.add(this.progress, "notransition");
-    this.classIE.remove(this.progress, "state-loading");
+    // this.button.removeAttribute("disabled");
+    // this.classIE.add(this.progress, "notransition");
+    // this.classIE.remove(this.progress, "state-loading");
+    //this._setProgress(0);
+    this._stop(100);
   }
 
   get classIE() {
