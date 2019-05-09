@@ -64,6 +64,9 @@ export class ProgressButtonDirective implements OnChanges, AfterViewInit {
 
     if (this.progress && _value != null) {
       if (_value.currentValue >= 0 && _value.currentValue <= 100) {
+        if(_value.currentValue === 0){
+          this.startProcess();
+        }
         this._setProgress(_value.currentValue);
         if (_value.currentValue >= 100) {
           this.stopProcess();
@@ -231,13 +234,13 @@ export class ProgressButtonDirective implements OnChanges, AfterViewInit {
     // add class state-loading to the button
     // (applies a specific transform to the button depending which data - style is defined - defined in the stylesheets)
     this.classIE.remove(this.progress, "notransition");
-    this.classIE.add(this.progress, "state-loading");
+    this.classIE.add(this.button, "state-loading");
   }
 
   stopProcess() {
-    // this.button.removeAttribute("disabled");
-    // this.classIE.add(this.progress, "notransition");
-    // this.classIE.remove(this.progress, "state-loading");
+    this.button.removeAttribute("disabled");
+    this.classIE.add(this.progress, "notransition");
+    this.classIE.remove(this.button, "state-loading");
     //this._setProgress(0);
     this._stop(100);
   }
