@@ -34,6 +34,7 @@ export class ProgressButtonDirective implements OnChanges, AfterViewInit {
 
   @Input()
   mk7ProgressButton: string;
+  __isStart: any;
 
   @Input()
   get value(): number {
@@ -64,9 +65,8 @@ export class ProgressButtonDirective implements OnChanges, AfterViewInit {
 
     if (this.progress && _value != null) {
       if (_value.currentValue >= 0 && _value.currentValue <= 100) {
-        if(_value.currentValue === 0){
-          this.startProcess();
-        }
+        if(!this.__isStart){ this.startProcess(); }
+        
         this._setProgress(_value.currentValue);
         if (_value.currentValue >= 100) {
           this.stopProcess();
@@ -221,7 +221,7 @@ export class ProgressButtonDirective implements OnChanges, AfterViewInit {
       // remove class state-loading from the button
       this.classIE.remove(this.button, "state-loading");
     },
-      100);
+      150);
   }
 
   private _enable() {
@@ -229,6 +229,9 @@ export class ProgressButtonDirective implements OnChanges, AfterViewInit {
   }
 
   startProcess() {
+
+    if(this.__isStart){ return; }
+
     // disable the button
     this.button.setAttribute("disabled", "");
     // add class state-loading to the button
@@ -240,9 +243,15 @@ export class ProgressButtonDirective implements OnChanges, AfterViewInit {
   stopProcess() {
     this.button.removeAttribute("disabled");
     this.classIE.add(this.progress, "notransition");
+
     this.classIE.remove(this.button, "state-loading");
+    this.button.classList.remove("state-loading");
+
+    console.log(this.button.classList);
+
     //this._setProgress(0);
     this._stop(100);
+    this.__isStart = false;
   }
 
   get classIE() {
